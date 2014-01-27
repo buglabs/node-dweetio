@@ -1,10 +1,24 @@
 var io = require("socket.io-client");
 var request = require("request");
+var fs = require("fs");
+
+var cookies = request.jar();
+var COOKIE_FILE = "cookies.txt";
+var DWEET_SERVER = "http://dweet.io";
+
+if(fs.existsSync(COOKIE_FILE))
+{
+    try
+    {
+        var cookieString = fs.readFileSync(COOKIE_FILE).toString();
+        cookies._jar.setCookieSync(cookieString, DWEET_SERVER);
+    }
+    catch(e){}
+}
 
 var dweetio = function()
 {
 	var self = this;
-	var DWEET_SERVER = "http://dweet.io";
 	var socket;
 	var listenCallbacks = {};
 
@@ -20,6 +34,14 @@ var dweetio = function()
 
 	function normalizeDweets(dweets)
 	{
+        cookies._jar.getCookies(DWEET_SERVER, function(err,cookies) {
+            try
+            {
+                fs.writeFile(COOKIE_FILE, cookies.join("; "));
+            }
+            catch(e){}
+        });
+
 		if(dweets instanceof Array)
 		{
 			for(var index = 0; index < dweets.length; index++)
@@ -63,7 +85,7 @@ var dweetio = function()
 		{
 			request({
 				url   : DWEET_SERVER + "/dweet",
-				jar : true,
+				jar : cookies,
 				method: "POST",
 				json  : data
 			}, function(err, response, responseData)
@@ -82,7 +104,7 @@ var dweetio = function()
 	{
 		request({
 			url   : DWEET_SERVER + "/dweet/for/" + thing,
-			jar : true,
+			jar : cookies,
 			method: "POST",
 			json  : data
 		}, function(err, response, responseData)
@@ -100,7 +122,7 @@ var dweetio = function()
 	{
 		request({
 			url   : DWEET_SERVER + "/get/latest/dweet/for/" + thing,
-			jar   : true,
+			jar   : cookies,
 			json  : {}
 		}, function(err, response, responseData)
 		{
@@ -117,7 +139,7 @@ var dweetio = function()
 	{
 		request({
 			url : DWEET_SERVER + "/get/dweets/for/" + thing,
-			jar : true,
+			jar : cookies,
 			json: {}
 		}, function(err, response, responseData)
 		{
