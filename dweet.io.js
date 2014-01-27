@@ -2,16 +2,15 @@ var io = require("socket.io-client");
 var request = require("request");
 var fs = require("fs");
 
-var cookies = request.jar();
-var COOKIE_FILE = "cookies.txt";
+var LAST_THING_NAME = "last-thing.dat";
 var DWEET_SERVER = "http://dweet.io";
+var lastThing;
 
-if(fs.existsSync(COOKIE_FILE))
+if(fs.existsSync(LAST_THING_NAME))
 {
     try
     {
-        var cookieString = fs.readFileSync(COOKIE_FILE).toString();
-        cookies._jar.setCookieSync(cookieString, DWEET_SERVER);
+        lastThing = fs.readFileSync(LAST_THING_NAME).toString();
     }
     catch(e){}
 }
@@ -21,6 +20,7 @@ var dweetio = function()
 	var self = this;
 	var socket;
 	var listenCallbacks = {};
+    var currentThing = lastThing;
 
 	function normalizeDweet(dweet)
 	{
@@ -34,14 +34,6 @@ var dweetio = function()
 
 	function normalizeDweets(dweets)
 	{
-        cookies._jar.getCookies(DWEET_SERVER, function(err,cookies) {
-            try
-            {
-                fs.writeFile(COOKIE_FILE, cookies.join("; "));
-            }
-            catch(e){}
-        });
-
 		if(dweets instanceof Array)
 		{
 			for(var index = 0; index < dweets.length; index++)
@@ -77,15 +69,15 @@ var dweetio = function()
 
 	self.dweet = function(data, callback)
 	{
-		if(self.current_thing)
+		if(currentThing)
 		{
-			self.dweet_for(self.current_thing, data, callback);
+			self.dweet_for(currentThing, data, callback);
 		}
 		else
 		{
 			request({
 				url   : DWEET_SERVER + "/dweet",
-				jar : cookies,
+				jar : true,
 				method: "POST",
 				json  : data
 			}, function(err, response, responseData)
@@ -94,6 +86,12 @@ var dweetio = function()
 				{
 					err = processError(responseData);
 				}
+
+                if(responseData["with"] && responseData["with"].thing != currentThing)
+                {
+                    currentThing = responseData["with"].thing;
+                    fs.writeFile(LAST_THING_NAME, currentThing);
+                }
 
 				callback(err, normalizeDweets(responseData["with"]));
 			});
@@ -104,7 +102,7 @@ var dweetio = function()
 	{
 		request({
 			url   : DWEET_SERVER + "/dweet/for/" + thing,
-			jar : cookies,
+			jar : true,
 			method: "POST",
 			json  : data
 		}, function(err, response, responseData)
@@ -122,7 +120,7 @@ var dweetio = function()
 	{
 		request({
 			url   : DWEET_SERVER + "/get/latest/dweet/for/" + thing,
-			jar   : cookies,
+			jar   : true,
 			json  : {}
 		}, function(err, response, responseData)
 		{
