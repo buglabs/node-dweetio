@@ -12,15 +12,15 @@ $ npm install node-dweetio --save
 ### Use It
 
 ```js
-var dweetio = require("node-dweetio");
-var dweetioClient = new dweetio();
+var dweetClient = require("node-dweetio");
+var dweetio = new dweetClient();
 ```
 
 ### Dweeting
 
 Send a dweet and let dweet.io make up a name for you. Subsequent calls to this will result in the same name being used.
 ```js
-dweetioClient.dweet({some:"data"}, function(err, dweet){
+dweetio.dweet({some:"data"}, function(err, dweet){
 
     console.log(dweet.thing); // The generated name
     console.log(dweet.content); // The content of the dweet
@@ -31,7 +31,7 @@ dweetioClient.dweet({some:"data"}, function(err, dweet){
 
 Send a dweet with a name you define.
 ```js
-dweetioClient.dweet_for("my-thing", {some:"data"}, function(err, dweet){
+dweetio.dweet_for("my-thing", {some:"data"}, function(err, dweet){
 
     console.log(dweet.thing); // "my-thing"
     console.log(dweet.content); // The content of the dweet
@@ -44,7 +44,7 @@ dweetioClient.dweet_for("my-thing", {some:"data"}, function(err, dweet){
 
 Get the latest dweet.
 ```js
-dweetioClient.get_latest_dweet_for("my-thing", function(err, dweet){
+dweetio.get_latest_dweet_for("my-thing", function(err, dweet){
 
     var dweet = dweet[0]; // Dweet is always an array of 1
 
@@ -57,7 +57,7 @@ dweetioClient.get_latest_dweet_for("my-thing", function(err, dweet){
 
 Get all dweets (up to 500 in the last 24 hours).
 ```js
-dweetioClient.get_all_dweets_for("my-thing", function(err, dweets){
+dweetio.get_all_dweets_for("my-thing", function(err, dweets){
 
     // Dweets is an array of dweets
     for(theDweet in dweets)
@@ -76,7 +76,7 @@ dweetioClient.get_all_dweets_for("my-thing", function(err, dweets){
 
 Listen for all dweets from a thing.
 ```js
-dweetioClient.listen_for("my-thing", function(dweet){
+dweetio.listen_for("my-thing", function(dweet){
 
     // This will be called anytime there is a new dweet for my-thing
 
@@ -85,12 +85,12 @@ dweetioClient.listen_for("my-thing", function(dweet){
 
 Stop listening for dweets from a thing.
 ```js
-dweetioClient.stop_listening_for("my-thing");
+dweetio.stop_listening_for("my-thing");
 ```
 
 Stop listening for dweets from everything.
 ```js
-dweetioClient.stop_listening();
+dweetio.stop_listening();
 ```
 
 ### Copyright & License
