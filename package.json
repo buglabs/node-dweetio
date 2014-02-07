@@ -1,23 +1,33 @@
 {
-	"name"        : "node-dweetio",
-	"version"     : "0.0.6",
-	"description" : "A node.js client for dweet.io",
-	"main"        : "dweet.io.js",
-	"repository"  : {
-		"type": "git",
-		"url" : "https://github.com/buglabs/node-dweetio.git"
-	},
-	"author"      : "Jim Heising <jheising@gmail.com>",
-	"license"     : "MIT",
-	"bugs"        : {
-		"url": "https://github.com/buglabs/node-dweetio/issues"
-	},
-	"keywords"    : [
-		"dweet.io", "IOT", "m2m", "robotics", "sensors", "arduino", "beaglebone"
-	],
-	"homepage"    : "http://dweet.io",
-	"dependencies": {
-		"socket.io-client": "~0.9.16",
-		"request"         : "~2.33.0"
-	}
+  "name": "node-dweetio",
+  "version": "0.0.6",
+  "description": "A node.js client for dweet.io",
+  "main": "dweet.io.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/buglabs/node-dweetio.git"
+  },
+  "author": "Jim Heising <jheising@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buglabs/node-dweetio/issues"
+  },
+  "keywords": [
+    "dweet.io",
+    "IOT",
+    "m2m",
+    "robotics",
+    "sensors",
+    "arduino",
+    "beaglebone"
+  ],
+  "homepage": "http://dweet.io",
+  "dependencies": {
+    "socket.io-client": "~0.9.16",
+    "request": "~2.33.0"
+  },
+  "devDependencies": {
+    "should": "~3.1.2",
+    "uuid": "~1.4.1"
+  }
 }
