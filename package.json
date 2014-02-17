@@ -1,6 +1,6 @@
 {
   "name": "node-dweetio",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A node.js client for dweet.io",
   "main": "dweet.io.js",
   "repository": {
