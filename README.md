@@ -93,6 +93,49 @@ Stop listening for dweets from everything.
 dweetio.stop_listening();
 ```
 
+### Locking & Security
+
+By default, all things are publicly accessible if you know the name of the thing. You can also lock things so that they are only accessible to users with valid security credentials. To purchase locks, visit https://dweet.io/locks. The locks will be emailed to you.
+
+To use purchased locks:
+
+```js
+// To lock a thing
+dweetio.lock("my-thing", "my-lock", "my-key", function(err){
+
+    // If there was a problem, err will be returned, otherwise the lock was successful.
+
+});
+
+// To unlock a thing
+dweetio.unlock("my-thing", "my-key", function(err){
+
+    // If there was a problem, err will be returned, otherwise the lock was successful.
+
+});
+
+// To remove a lock no matter what it's attached to
+dweetio.remove_lock("my-lock", "my-key", function(err){
+
+    // If there was a problem, err will be returned, otherwise the lock was successful.
+
+});
+```
+
+Once a thing has been locked, you must pass the key to the lock with any call you make to other functions in this client library. The key will be passed as a parameter before the callback function. For example:
+
+```js
+dweetio.dweet_for("my-locked-thing", {some:"data"}, "my-key", callback);
+
+dweetio.get_latest_dweet_for("my-locked-thing", "my-key", callback);
+
+dweetio.get_all_dweets_for("my-locked-thing", "my-key", callback);
+
+dweetio.listen_for("my-locked-thing", "my-key", callback);
+```
+
+Failure to pass a key or passing an incorrect key for a locked thing will result in an error being returned in the callback.
+
 ### Copyright & License
 
 Copyright © 2013 Jim Heising (https://github.com/jheising)
