@@ -72,7 +72,38 @@ dweetio.get_all_dweets_for("my-thing", function(err, dweets){
 });
 ```
 
-### Notifications
+### Alerts
+
+Set an alert.
+```js
+                              // Email addresses can also be an array
+dweetio.set_alert("my-thing", "email1@doh-main.com,email2@doh-main.com", "if(dweet.some_data > 100) return 'something wrong';", "my-key", function(err){
+
+    // If there was a problem, err will be returned, otherwise setting the alert was successful.
+
+});
+```
+
+Get an alert
+```js
+dweetio.get_alert("my-thing", "my-key", function(err, alertData){
+
+    // If there was a problem, err will be returned, otherwise the data for the alert will be returned in alertData
+
+});
+```
+
+Remove an alert
+```js
+// Email addresses can also be an array
+dweetio.remove_alert("my-thing", "my-key", function(err){
+
+    // If there was a problem, err will be returned, otherwise the alert will have been successfully removed.
+
+});
+```
+
+### Pubsub
 
 Listen for all dweets from a thing.
 ```js
