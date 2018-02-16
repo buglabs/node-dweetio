@@ -1,13 +1,16 @@
 {
-	"name": "node-dweetio",
-	"version": "0.0.13",
+	"name": "node-dweetio-secure",
+	"version": "0.0.14",
 	"description": "A node.js client for dweet.io",
 	"main": "dweet.io.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/buglabs/node-dweetio.git"
+		"url": "https://github.com/buglabs/node-dweetio-secure.git"
 	},
 	"author": "Jim Heising <jheising@gmail.com>",
+	"contributors": [
+		"Marcin Sielski <marcin.sielski@gmail.com> (https://linkedin.com/in/msielski)"
+	],
 	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/buglabs/node-dweetio/issues"
