@@ -1,11 +1,11 @@
 {
-	"name": "node-dweetio-secure",
-	"version": "0.0.14",
+	"name": "hazyair-dweetio",
+	"version": "0.0.15",
 	"description": "A node.js client for dweet.io",
 	"main": "dweet.io.js",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/buglabs/node-dweetio-secure.git"
+		"url": "https://github.com/hazyair/hazyair-dweetio.git"
 	},
 	"author": "Jim Heising <jheising@gmail.com>",
 	"contributors": [
@@ -29,8 +29,8 @@
 	],
 	"homepage": "http://dweet.io",
 	"dependencies": {
-		"request": "2.33.0",
-		"socket.io-client": "^2.0.4"
+		"socket.io-client": "^2.2.0",
+		"request": "2.88.0"
 	},
 	"devDependencies": {
 		"should": "3.1.2",
