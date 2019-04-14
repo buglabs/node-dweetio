@@ -1,6 +1,6 @@
 {
 	"name": "hazyair-dweetio",
-	"version": "0.0.15",
+	"version": "1.0.0",
 	"description": "A node.js client for dweet.io",
 	"main": "dweet.io.js",
 	"repository": {

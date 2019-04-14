@@ -1,4 +1,4 @@
-# node-dweetio
+# hazyair-dweetio
 
 A node.js module for interacting with http://dweet.io — a free, easy-to-use messaging platform for the Internet of Things.
 
@@ -6,13 +6,13 @@ A node.js module for interacting with http://dweet.io — a free, easy-to-use me
 
 via npm:
 ```bash
-$ npm install node-dweetio --save
+$ npm install hazyair-dweetio
 ```
 
 ### Use It
 
 ```js
-var dweetClient = require("node-dweetio");
+var dweetClient = require("hazyair-dweetio");
 var dweetio = new dweetClient();
 ```
 
@@ -169,6 +169,8 @@ Failure to pass a key or passing an incorrect key for a locked thing will result
 
 ### Copyright & License
 
+Copyright (c) 2019 Marcin Sielski
+<br/>
 Copyright © 2013 Jim Heising (https://github.com/jheising)
 <br/>
 Copyright © 2013 Bug Labs, Inc. (http://buglabs.net)
